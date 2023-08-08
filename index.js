@@ -36,3 +36,8 @@ const form = document.getElementById('registrationForm');
 
             form.reset();
         });
+function calculateAge(birthday) {
+    const ageDiffMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDiffMs); // milliseconds from epoch
+    return Math.floor(ageDate.getUTCFullYear() - 1970);
+}
