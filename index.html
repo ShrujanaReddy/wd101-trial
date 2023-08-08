@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Registration Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="index.js"></script>
 </head>
-
 <body class="bg-gray-100">
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
-        <h1 class="text-2xl font-semibold mb-4">Registration Form</h1>
-        <form id="registrationForm">
+    <div class="container mx-auto mt-8">
+        <h1 class="text-3xl font-semibold mb-4">Registration Page</h1>
+        
+        <!-- Registration Form -->
+        <form id="registrationForm" class="bg-white shadow-md rounded-lg p-6">
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter full name"
-                    class="mt-1 p-2 w-full rounded-md border border-gray-300">
+                <input type="text" id="name" name="name" class="mt-1 p-2 border rounded w-full" required>
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter email" required
-                    class="mt-1 p-2 w-full rounded-md border border-gray-300">
+                <input type="email" id="email" name="email" class="mt-1 p-2 border rounded w-full" required>
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter password" required
-                    class="mt-1 p-2 w-full rounded-md border border-gray-300">
+                <input type="password" id="password" name="password" class="mt-1 p-2 border rounded w-full" required>
             </div>
             <div class="mb-4">
                 <label for="dob" class="block text-sm font-medium text-gray-700">Date of Birth</label>
-                <input type="date" id="dob" name="dob" required
-                    class="mt-1 p-2 w-full rounded-md border border-gray-300">
+                <input type="date" id="dob" name="dob" class="mt-1 p-2 border rounded w-full" required>
             </div>
             <div class="mb-4">
-                <label class="flex items-center">
-                    <input type="checkbox" id="acceptTerms" name="acceptTerms" required class="form-checkbox mr-2">
-                    <span class="text-sm text-gray-700">I accept the terms and conditions</span>
+                <label class="inline-flex items-center">
+                    <input type="checkbox" id="termsAccepted" name="termsAccepted" class="form-checkbox" required>
+                    <span class="ml-2">I accept the terms and conditions</span>
                 </label>
             </div>
-            <button type="submit"
-                class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
+            <div class="mt-6">
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Register</button>
+            </div>
         </form>
-    </div>
-    <div class=" mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-        <h2 class="text-xl font-semibold mb-4">Registered Users</h2>
-        <table id="userTable" class="w-full border">
+
+        <!-- Data Table -->
+        <table class="mt-8 w-full border-collapse table-auto">
             <thead>
-                <tr class="bg-gray-100">
+                <tr>
                     <th class="border p-2">Name</th>
                     <th class="border p-2">Email</th>
                     <th class="border p-2">Password</th>
@@ -54,13 +51,10 @@
                     <th class="border p-2">Accepted terms?</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Data will be dynamically added here using JavaScript -->
+            <tbody id="dataTableBody">
+                <!-- Data rows will be inserted here dynamically -->
             </tbody>
         </table>
     </div>
-
-    <script src="index.js"></script>
 </body>
-
 </html>
