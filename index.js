@@ -1,6 +1,17 @@
 const form = document.getElementById('registrationForm');
         const userTable = document.getElementById('userTable');
-
+document.addEventListener('DOMContentLoaded', function() {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    users.forEach(user => {
+        const newRow = userTable.insertRow();
+        newRow.innerHTML = `
+            <td class="border p-2">${user.name}</td>
+            <td class="border p-2">${user.email}</td>
+            <td class="border p-2">${user.dob}</td>
+        `;
+    });
+});
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
