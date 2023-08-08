@@ -1,54 +1,42 @@
-const form = document.getElementById('registrationForm');
-        const userTable = document.getElementById('userTable');
-document.addEventListener('DOMContentLoaded', function() {
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    users.forEach(user => {
-        const newRow = userTable.insertRow();
-        newRow.innerHTML = `
-            <td class="border p-2">${user.name}</td>
-            <td class="border p-2">${user.email}</td>
-            <td class="border p-2">${user.dob}</td>
-        `;
-    });
-});
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('registrationForm');
+        const tableBody = document.getElementById('dataTableBody');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             const dob = document.getElementById('dob').value;
-            const password=document.getElementById('password').value;
-            //const acceptTerms=document.getElementById('acceptTerms').value;
+            const termsAccepted = document.getElementById('termsAccepted').checked;
 
-            const userAge = calculateAge(new Date(dob));
-
-            if (userAge < 18 || userAge > 55) {
-            alert('Age must be between 18 and 55.');
-            return; // Prevent form submission
+            // Validate age between 18 and 55
+            const dobDate = new Date(dob);
+            const today = new Date();
+            const age = today.getFullYear() - dobDate.getFullYear();
+            if (age < 18 || age > 55) {
+                alert('Age must be between 18 and 55 years.');
+                return;
             }
 
-            const user = { name, email, dob, password/*,acceptTerms */};
+            // Validate email
+            if (!isValidEmail(email)) {
+                alert('Invalid email address.');
+                return;
+            }
 
-            // Store data in local storage
-            let users = JSON.parse(localStorage.getItem('users')) || [];
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
+            const newRow = tableBody.insertRow();
+            newRow.innerHTML = `<td>${name}</td><td>${email}</td><td>${password}</td><td>${dob}</td><td>${termsAccepted}</td>`;
 
-            // Add user data to table
-            const newRow = userTable.insertRow();
-            newRow.innerHTML = `
-                <td class="border p-2 justify-center">${user.name}</td>
-                <td class="border p-2 justify-center">${user.email}</td>
-                <td class="border p-2 justify-center">${user.password}</td>
-                <td class="border p-2 justify-center">${user.dob}</td>
-                <td class="border p-2 justify-center">true</td>
-            `;
-
+            // Clear form fields
             form.reset();
         });
-function calculateAge(birthday) {
-    const ageDiffMs = Date.now() - birthday.getTime();
-    const ageDate = new Date(ageDiffMs); // milliseconds from epoch
-    return Math.floor(ageDate.getUTCFullYear() - 1970);
-}
+
+        function isValidEmail(email) {
+            // Basic email validation using regex
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+    });
