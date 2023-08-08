@@ -14,7 +14,7 @@ const form = document.getElementById('registrationForm');
 
             if (userAge < 18 || userAge > 55) {
             alert('Age must be between 18 and 55.');
-            return false; // Prevent form submission
+            return; // Prevent form submission
             }
 
             const user = { name, email, dob, password/*,acceptTerms */};
